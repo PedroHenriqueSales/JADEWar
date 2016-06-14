@@ -34,7 +34,8 @@ public class King extends Agent{
         		 String myName = this.getAgent().getName().split("@")[0];
                  if (msg != null) {
                 	if(msg.getContent().equals(myName+"?") ){
-                		System.out.println("Recebeu!!");
+                		String warriorName = msg.getSender().getName().split("@")[0];
+                		System.out.println("Cavaleiro " + warriorName + " identificado" );
                 	}
                  }
                     
@@ -50,12 +51,12 @@ public class King extends Agent{
 	private void createWarrior(int num){
 		PlatformController container = getContainerController();
 		Object[] args = new Object[1];
+		String kingName = this.getName().split("@")[0];
 		try {
             for (int i = 0;  i < num;  i++) {
                 // create a new agent
-		String localName = "warrior"+this.getName().toString()+i;
-		
-		args[0] = this.getName();
+		String localName = "warrior"+kingName+i;
+		args[0] = kingName;
 		AgentController guest = container.createNewAgent(localName, "soldiers.Warrior", args);
 		guest.start();
             }

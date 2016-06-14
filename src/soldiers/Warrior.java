@@ -28,8 +28,6 @@ public class Warrior extends Agent{
             DFService.register( this, dfd );           
             
             String kingName = (String)this.getArguments()[0];
-            kingName = kingName.split("@")[0];
-            
             ACLMessage hello = new ACLMessage( ACLMessage.INFORM);
             hello.setContent(kingName + "?");
             hello.addReceiver( new AID(kingName, AID.ISLOCALNAME ));
@@ -38,9 +36,7 @@ public class Warrior extends Agent{
             // add a Behaviour to process incoming messages
             addBehaviour( new CyclicBehaviour( this ) {
                             public void action() {
-                            	ACLMessage msg = receive( MessageTemplate.MatchPerformative( ACLMessage.INFORM ) );
-                            	
-                            	
+                            	ACLMessage msg = receive( MessageTemplate.MatchPerformative( ACLMessage.INFORM ) );       	
                             	 
                             }
                         } );

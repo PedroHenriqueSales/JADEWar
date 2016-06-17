@@ -14,6 +14,8 @@ import java.io.InputStreamReader;
 
 public class King extends Agent{
 
+	private int myWarriors;
+	
 	protected void setup() {
         try {
             // create the agent descrption of itself
@@ -38,7 +40,19 @@ public class King extends Agent{
                  if (msg != null) {
                 	if(msg.getContent().equals(myName+"?") ){
                 		String warriorName = msg.getSender().getName().split("@")[0];
-                		System.out.println("Cavaleiro " + warriorName + " identificado" );
+                		ACLMessage response = msg.createReply();
+                		if(myName.equals("KingNorth")){
+                    		response.setContent("The winter is coming! Welcome Sir.");
+                		}else{
+                			response.setContent("Fire and Blood! Welcome Sir.");
+                		}
+                		
+                		if(msg.getSender().getName().contains("warrior")){
+                			myWarriors++;
+                			System.out.println(myName+ " warriors: " + myWarriors);
+                		}
+           
+                		send(response);
                 	}
                  }
                     
@@ -71,7 +85,7 @@ public class King extends Agent{
 	}
 	
 	private int init(String kingName) throws IOException{
-		System.out.println("Quantos soldados deseja para" + kingName + "?");
+		System.out.println("Quantos guerreiros deseja para " + kingName + "?");
 		
 	    try{
 	        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));

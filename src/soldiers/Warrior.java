@@ -7,16 +7,17 @@ import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
 
 public class Warrior extends Agent{
 	
-	private String myKing;
-	
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected void setup() {
         try {
-            // create the agent descrption of itself
+            // create the agent description of itself
             ServiceDescription sd = new ServiceDescription();
             sd.setType( "Warrior" );
             sd.setName( "Soldier" );
@@ -32,14 +33,7 @@ public class Warrior extends Agent{
             hello.setContent(kingName + "?");
             hello.addReceiver( new AID(kingName, AID.ISLOCALNAME ));
             send( hello );
-            
-            // add a Behaviour to process incoming messages
-            addBehaviour( new CyclicBehaviour( this ) {
-                            public void action() {
-                            	ACLMessage msg = receive( MessageTemplate.MatchPerformative( ACLMessage.INFORM ) );       	
-                            	 
-                            }
-                        } );
+ 
         }
         catch (Exception e) {
             System.out.println( "Saw exception in GuestAgent: " + e );
@@ -47,6 +41,5 @@ public class Warrior extends Agent{
         }
 
     }
-
 
 }

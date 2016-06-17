@@ -14,6 +14,11 @@ import java.io.InputStreamReader;
 
 public class King extends Agent{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int myWarriors;
 	
 	protected void setup() {
@@ -33,14 +38,19 @@ public class King extends Agent{
             e.printStackTrace();
         }
         
-        addBehaviour( new CyclicBehaviour( this ) {
-        	 public void action() {
+        addBehaviour(new CyclicBehaviour(this) {
+        	 /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public void action() {
         		 ACLMessage msg = receive();
         		 String myName = this.getAgent().getName().split("@")[0];
                  if (msg != null) {
                 	if(msg.getContent().equals(myName+"?") ){
-                		String warriorName = msg.getSender().getName().split("@")[0];
                 		ACLMessage response = msg.createReply();
+                			
                 		if(myName.equals("KingNorth")){
                     		response.setContent("The winter is coming! Welcome Sir.");
                 		}else{
@@ -62,7 +72,7 @@ public class King extends Agent{
                  }
              }
         } );
-
+        
     }
 	
 	private void createWarrior(int num){

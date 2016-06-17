@@ -35,11 +35,40 @@ public class Warrior extends Agent{
             send( hello );
  
         }
+       
         catch (Exception e) {
             System.out.println( "Saw exception in GuestAgent: " + e );
             e.printStackTrace();
         }
+        
+        addBehaviour(new CyclicBehaviour(this){
+        	/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
+			public void action(){
+				ACLMessage msg = receive();
+				
+				if(msg != null){
+					ACLMessage response = msg.createReply();
+					String content = msg.getContent();
+					if (content.equals("KingNorth")){
+						response.setContent("GUERRA!");
+					}else{
+						response.setContent("HOLD THE DOOR");
+					}
+					
+					send(response);
+				}
+				
+				else {
+                // if no message is arrived, block the behaviour
+                block();
+				}
+			}	
+        	
+        });
     }
 
 }

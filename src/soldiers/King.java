@@ -26,7 +26,7 @@ public class King extends Agent{
             // create the agent descrption of itself
 
             DFAgentDescription dfd = new DFAgentDescription();
-            dfd.setName( getAID() );
+            dfd.setName(getAID());
             DFService.register(this, dfd);
             // register the description with the DF
             

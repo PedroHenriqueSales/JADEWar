@@ -53,8 +53,8 @@ public class Warrior extends Agent{
 				if(msg != null){
 					ACLMessage response = msg.createReply();
 					String content = msg.getContent();
-					if (content.equals("KingNorth")){
-						response.setContent("GUERRA!");
+					if (content.equalsIgnoreCase("The winter is coming! Welcome Sir.")){
+						response.setContent("You know nothing");
 					}else{
 						response.setContent("HOLD THE DOOR");
 					}

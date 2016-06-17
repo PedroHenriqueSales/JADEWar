@@ -3,13 +3,14 @@ package soldiers;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
-import jade.domain.df;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
 import jade.wrapper.AgentController;
 import jade.wrapper.PlatformController;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class King extends Agent{
 
@@ -22,7 +23,9 @@ public class King extends Agent{
             DFService.register(this, dfd);
             // register the description with the DF
             
-            createWarrior(4);
+            String myName = this.getName().split("@")[0];
+            int num = init(myName);
+            createWarrior(num);
         }catch (Exception e) {
             System.out.println( "Saw exception in GuestAgent: " + e );
             e.printStackTrace();
@@ -65,6 +68,23 @@ public class King extends Agent{
             System.err.println( "Exception while adding guests: " + e );
             e.printStackTrace();
         }
+	}
+	
+	private int init(String kingName) throws IOException{
+		System.out.println("Quantos soldados deseja para" + kingName + "?");
+		
+	    try{
+	        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+	        String s = bufferRead.readLine();
+
+	        return Integer.parseInt(s);
+	    }
+	    catch(IOException e)
+	    {
+	        e.printStackTrace();
+	    }
+	    
+	    return 0;
 	}
 
 }
